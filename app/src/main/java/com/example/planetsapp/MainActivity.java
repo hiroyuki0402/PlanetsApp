@@ -3,7 +3,11 @@ package com.example.planetsapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -33,5 +37,18 @@ public class MainActivity extends AppCompatActivity {
         planetDatas.add(new PlanetData("Neptune", "14 Moons", R.drawable.neptune));
         adapter = new CustomAdapter(planetDatas, getApplicationContext());
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Log.d("ViewTag:", "ViewTag: " +view.getTag().toString());
+                Log.d("adapterView:","adapterView:" +adapterView.toString());
+                Log.d("index(i):", "index(i):" + i);
+                Log.d("l:", "l:" + l);
+                Toast.makeText(MainActivity.this, adapter.getItem(i).getPlanetName(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }
